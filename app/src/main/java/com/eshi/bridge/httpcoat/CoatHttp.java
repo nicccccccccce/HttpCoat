@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CoatHttp {
-    public  enum Method {GET, POST}
+    enum Method {GET, POST}
     String url() default "";
     Method   method() default Method.GET;
 }

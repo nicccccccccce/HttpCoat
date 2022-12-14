@@ -5,5 +5,5 @@ package com.eshi.bridge.httpcoat;
  */
 
 public interface IHttp {
-    <T> void request(RequestPart<T> requestPart);
+    <J extends RequestPart<T>,T> void request(J requestPart);
 }

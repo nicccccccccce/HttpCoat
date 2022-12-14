@@ -1,11 +1,21 @@
 package com.eshi.bridge.httpcoat;
 
 /**
- * Created by user on 2017/9/22.
+ * @auth:Administrator
+ * @date:2022/12/13 0013
  */
-
 public class TestBean {
-    private int status;
-    private String jsonData;
-    private String message;
+
+    public int firstUpdatePwdFlag;
+    public String maxExpireTime;
+    public String token;
+
+    @Override
+    public String toString() {
+        return "TestBean{" +
+                "firstUpdatePwdFlag=" + firstUpdatePwdFlag +
+                ", maxExpireTime='" + maxExpireTime + '\'' +
+                ", token='" + token + '\'' +
+                '}';
+    }
 }

@@ -3,6 +3,11 @@ package com.eshi.bridge.httpcoat;
 import android.app.Application;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 
 /**
  * Created by user on 2017/9/25.
@@ -30,6 +35,13 @@ public class CoatApplication extends Application {
             public <T> T parse(String s, Class<T> t) {
                 return new Gson().fromJson(s, t);
             }
+
+            @Override
+            public <T> T parse(String s, Type type) {
+                Gson gson = new Gson();
+                return gson.fromJson(s, type);
+            }
+
         }, HttpMethod.VOLLEY);
     }
 

@@ -6,4 +6,5 @@ package com.eshi.bridge.httpcoat;
 
 public interface IResponseListener<T> {
     void OnResponse(String url, T t);
+    void OnFailed(String url, Exception coatError);
 }

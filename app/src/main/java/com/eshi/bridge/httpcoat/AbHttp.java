@@ -1,6 +1,10 @@
 package com.eshi.bridge.httpcoat;
 
 import android.app.Activity;
+import android.util.Log;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 
 /**
@@ -30,12 +34,38 @@ public abstract class AbHttp implements IHttp {
      * @param <T>
      */
     protected <T> void coatResp(String url, String response, Class<T> cls, IResponseListener<T> listener) {
-        if (HttpCoatUtils.textIsNotNull(response)) {
-            if (httpParser != null)
-                listener.OnResponse(url, httpParser.parse(response, cls));
+        try {
+            if (HttpCoatUtils.textIsNotNull(response)) {
+                if (httpParser != null && listener != null) {
+//                    Class<T> entityClass = GenericsUtils.getSuperClassGenricType(cls, 0);
+//                    ParameterizedType type = (ParameterizedType) cls
+//                            .getGenericSuperclass();
+//                    Class<T> entityClass = (Class<T>) type.getActualTypeArguments()[0];
+//                    Log.i("TAG",entityClass.getName());
+                    listener.OnResponse(url, httpParser.parse(response, cls));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (listener != null) {
+                listener.OnFailed(url, e);
+            }
         }
     }
-
+    protected <T> void coatResp(String url, String response, Type type, IResponseListener<T> listener) {
+        try {
+            if (HttpCoatUtils.textIsNotNull(response)) {
+                if (httpParser != null && listener != null) {
+                    listener.OnResponse(url, httpParser.parse(response, type));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (listener != null) {
+                listener.OnFailed(url, e);
+            }
+        }
+    }
     /**
      * @param httpParser
      */

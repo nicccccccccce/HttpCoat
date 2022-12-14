@@ -1,18 +1,41 @@
 package com.eshi.bridge.httpcoat;
 
+import android.os.Build;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Map;
 
 /**
  * Created by user on 2017/9/25.
  */
 
-public class RequestPart<T> {
+public class RequestPart<T>{
     private HttpMethod.RequestMethod rm;
     private String url;
-    private Class<T> respBean;
     private Map<String, String> param;
     private IResponseListener<T> iResponseListener;
     private IErrorListener errorListener;
+    private Class<T> entityClass;
+    private Type type;
+    public RequestPart() {
+    }
+
+    public void setEntityClass(Class<T> entityClass) {
+        this.entityClass = entityClass;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public Class<T> getEntityClass() {
+        return entityClass;
+    }
 
     public HttpMethod.RequestMethod getRequestMethod() {
         return rm;
@@ -30,13 +53,7 @@ public class RequestPart<T> {
         this.url = url;
     }
 
-    public Class<T> getRespBean() {
-        return respBean;
-    }
 
-    public void setRespBean(Class<T> respBean) {
-        this.respBean = respBean;
-    }
 
     public Map<String, String> getParam() {
         return param;
@@ -61,4 +78,5 @@ public class RequestPart<T> {
     public void setErrorListener(IErrorListener errorListener) {
         this.errorListener = errorListener;
     }
+
 }
